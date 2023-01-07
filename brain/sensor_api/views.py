@@ -11,7 +11,7 @@ from sensor_api.serializers import (
 
 class TempSensorViewSet(viewsets.ModelViewSet):
     """
-    API endpoint for sensors
+    API endpoint for TempSensor
     """
     queryset = TempSensor.objects.all().order_by('-pin_number')
     serializer_class = TempSensorSerializer
