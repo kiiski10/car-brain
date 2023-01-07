@@ -1,3 +1,4 @@
 from django.contrib import admin
+from sensor_api.models import TempSensor
 
-# Register your models here.
+admin.site.register(TempSensor)
