@@ -8,6 +8,7 @@ class SensorViewSet(viewsets.ModelViewSet):
     """
     API endpoint for Sensors
     """
-    queryset = Sensor.objects.all().order_by('-created')
+
+    queryset = Sensor.objects.all().order_by("-created")
     serializer_class = SensorSerializer
     permission_classes = [permissions.IsAuthenticated]
