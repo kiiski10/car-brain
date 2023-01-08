@@ -33,6 +33,8 @@ PRESSURE_UNITS = [
 
 
 class CommandBaseString(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    edited = models.DateTimeField(auto_now=True)
     string = models.CharField(
         max_length=200,
         default="python3 obd.py {args}"
