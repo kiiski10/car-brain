@@ -55,7 +55,7 @@ class BaseSensor(models.Model):
     edited = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.label
+        return "{}; {}".format(self.label, self.get_unit_display())
 
     def url(self):
         return reverse("sensor-detail", kwargs={"pk": self.pk})
