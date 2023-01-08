@@ -32,18 +32,30 @@ PRESSURE_UNITS = [
 ]
 
 
+class CommandBaseString(models.Model):
+    string = models.CharField(
+        max_length=200,
+        default="python3 obd.py {args}"
+    )
+
+    def __str__(self):
+        return self.string
+
+
 class BaseSensor(models.Model):
     label = models.CharField(max_length=100)
     description = models.CharField(max_length=250, blank=True)
-    unit = None # Override this in subclass
-    pin_number = models.CharField(max_length=5)
-    command = models.CharField(max_length=250, blank=True)
+    unit = None       # Override this in subclass
+    command_base = models.ForeignKey(CommandBaseString, on_delete=models.PROTECT, null=True)
+    command_args = models.CharField(max_length=250, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    edited = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.label
 
     def read(self):
-        return 1023 # TODO: return value from sensor with `self.command`
+        return 1023 # TODO: return value from sensor with `self.command_*`
 
 
 class TempSensor(BaseSensor):
