@@ -13,5 +13,6 @@ class SensorSerializer(serializers.HyperlinkedModelSerializer):
             'value',
             'unit', 
             'description', 
+            'url',
         ]
 

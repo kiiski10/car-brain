@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 TEMPERATURE_UNITS = [
     ("c", "°C"),
@@ -55,6 +56,9 @@ class BaseSensor(models.Model):
 
     def __str__(self):
         return self.label
+
+    def url(self):
+        return reverse("sensor-detail", kwargs={"pk": self.pk})
 
     def value(self):
         return 1023 # TODO: return value from sensor with `self.command_*`
