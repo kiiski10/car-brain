@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from sensor_api.validators import validate_command_base_string
 
 TEMPERATURE_UNITS = [
     ("c", "°C"),
@@ -38,7 +39,8 @@ class CommandBaseString(models.Model):
     edited = models.DateTimeField(auto_now=True)
     string = models.CharField(
         max_length=200,
-        default="python3 obd.py {args}"
+        default="python3 obd.py {args}",
+        validators=[validate_command_base_string],
     )
 
     def __str__(self):
