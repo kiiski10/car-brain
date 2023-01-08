@@ -48,8 +48,8 @@ class BaseSensor(models.Model):
     label = models.CharField(max_length=100)
     description = models.CharField(max_length=250, blank=True)
     unit = None       # Override this in subclass
-    command_base = models.ForeignKey(CommandBaseString, on_delete=models.PROTECT, null=True)
-    command_args = models.CharField(max_length=250, blank=True)
+    command_base = models.ForeignKey(CommandBaseString, on_delete=models.PROTECT, blank=True, null=True)
+    command_args = models.CharField(max_length=250, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
 
