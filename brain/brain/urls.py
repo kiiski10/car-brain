@@ -19,15 +19,10 @@ from rest_framework import routers
 from sensor_api import views
 
 router = routers.DefaultRouter()
-router.register(r'temp', views.TempSensorViewSet)
-router.register(r'flow', views.FlowSensorViewSet)
-router.register(r'rotation', views.RotationSensorViewSet)
-router.register(r'speed', views.SpeedSensorViewSet)
-router.register(r'humidity', views.HumiditySensorViewSet)
-router.register(r'pressure', views.PressureSensorViewSet)
+router.register(r'sensors', views.SensorViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

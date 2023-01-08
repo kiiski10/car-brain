@@ -56,47 +56,18 @@ class BaseSensor(models.Model):
     def __str__(self):
         return self.label
 
-    def read(self):
+    def value(self):
         return 1023 # TODO: return value from sensor with `self.command_*`
 
 
-class TempSensor(BaseSensor):
+class Sensor(BaseSensor):
     unit = models.CharField(
-        choices=TEMPERATURE_UNITS,
+        choices=TEMPERATURE_UNITS + \
+            FLOW_UNITS + \
+            ROTATION_UNITS + \
+            HUMIDITY_UNITS + \
+            SPEED_UNITS + \
+            PRESSURE_UNITS,
         max_length=5,
     )
 
-
-class FlowSensor(BaseSensor):
-    unit = models.CharField(
-        choices=FLOW_UNITS,
-        max_length=5,
-    )
-
-
-class RotationSensor(BaseSensor):
-    unit = models.CharField(
-        choices=ROTATION_UNITS,
-        max_length=5,
-    )
-
-
-class SpeedSensor(BaseSensor):
-    unit = models.CharField(
-        choices=SPEED_UNITS,
-        max_length=5,
-    )
-
-
-class HumiditySensor(BaseSensor):
-    unit = models.CharField(
-        choices=HUMIDITY_UNITS,
-        max_length=5,
-    )
-
-
-class PressureSensor(BaseSensor):
-    unit = models.CharField(
-        choices=PRESSURE_UNITS,
-        max_length=5,
-    )
