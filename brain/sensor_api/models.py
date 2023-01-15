@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 from sensor_api.validators import validate_command_base_string
 
 TEMPERATURE_UNITS = [
