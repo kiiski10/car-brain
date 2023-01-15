@@ -1,14 +1,24 @@
 from rest_framework import viewsets
 from rest_framework import permissions
-from sensor_api.models import Sensor
-from sensor_api.serializers import SensorSerializer
+from sensor_api.models import OBDSensor, OneWireSensor
+from sensor_api.serializers import OBDSensorSerializer, OneWireSensorSerializer
 
 
-class SensorViewSet(viewsets.ModelViewSet):
+class OneWireSensorViewSet(viewsets.ModelViewSet):
     """
-    API endpoint for Sensors
+    API endpoint for sensors using Dallas 1-Wire protocol
     """
 
-    queryset = Sensor.objects.all().order_by("-created")
-    serializer_class = SensorSerializer
+    queryset = OneWireSensor.objects.all().order_by("-created")
+    serializer_class = OneWireSensorSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class OBDSensorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for OBD2 sensors
+    """
+
+    queryset = OBDSensor.objects.all().order_by("-created")
+    serializer_class = OBDSensorSerializer
     permission_classes = [permissions.IsAuthenticated]

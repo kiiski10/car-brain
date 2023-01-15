@@ -1,11 +1,25 @@
 from rest_framework import serializers
 
-from .models import Sensor
+from .models import OneWireSensor, OBDSensor
 
 
-class SensorSerializer(serializers.HyperlinkedModelSerializer):
+class OneWireSensorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Sensor
+        model = OneWireSensor
+        fields = [
+            "pk",
+            "command_args",
+            "label",
+            "value",
+            "unit",
+            "description",
+            "url",
+        ]
+
+
+class OBDSensorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = OBDSensor
         fields = [
             "pk",
             "command_args",

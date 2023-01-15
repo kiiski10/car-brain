@@ -19,7 +19,8 @@ from rest_framework import routers
 from sensor_api import views
 
 router = routers.DefaultRouter()
-router.register(r"sensors", views.SensorViewSet)
+router.register(r"obd-sensors", views.OBDSensorViewSet)
+router.register(r"one-sensors", views.OneWireSensorViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

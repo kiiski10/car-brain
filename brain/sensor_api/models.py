@@ -50,7 +50,17 @@ class CommandBaseString(models.Model):
 class BaseSensor(models.Model):
     label = models.CharField(max_length=100)
     description = models.CharField(max_length=250, blank=True)
-    unit = None  # Override this in subclass
+    unit = models.CharField(
+        choices=TEMPERATURE_UNITS
+        + FLOW_UNITS
+        + ROTATION_UNITS
+        + HUMIDITY_UNITS
+        + SPEED_UNITS
+        + PRESSURE_UNITS,
+        max_length=10,
+        blank=True,
+        null=True,
+    )
     command_base = models.ForeignKey(
         CommandBaseString, on_delete=models.PROTECT, blank=True, null=True
     )
@@ -61,20 +71,19 @@ class BaseSensor(models.Model):
     def __str__(self):
         return "{}; {}".format(self.label, self.get_unit_display())
 
-    def url(self):
-        return reverse("sensor-detail", kwargs={"pk": self.pk})
-
     def value(self):
+        pass # override in subclass
+
+
+class OneWireSensor(BaseSensor):
+    def value(self):
+        # TODO: read value from file
         return 1023  # TODO: return value from sensor with `self.command_*`
 
 
-class Sensor(BaseSensor):
-    unit = models.CharField(
-        choices=TEMPERATURE_UNITS
-        + FLOW_UNITS
-        + ROTATION_UNITS
-        + HUMIDITY_UNITS
-        + SPEED_UNITS
-        + PRESSURE_UNITS,
-        max_length=5,
-    )
+class OBDSensor(BaseSensor):
+    sensor_oid = models.CharField(max_length=30, blank=True)
+    
+    def value(self):
+        # TODO: retrive the value with pyobd library
+        return 3.13243645867
