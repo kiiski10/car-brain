@@ -1,5 +1,6 @@
 from django.db import models
 from sensor_api.validators import validate_command_base_string
+from sensor_api.sensor_types import onewire
 
 TEMPERATURE_UNITS = [
     ("c", "°C"),
@@ -32,6 +33,7 @@ PRESSURE_UNITS = [
     ("kpa", "kPa"),
 ]
 
+ONE_WIRE_SERVICE = onewire.OneWireService()
 
 class CommandBaseString(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -76,8 +78,7 @@ class BaseSensor(models.Model):
 
 class OneWireSensor(BaseSensor):
     def value(self):
-        # TODO: read value from file
-        return 1023  # TODO: return value from sensor with `self.command_*`
+        return ONE_WIRE_SERVICE.sensors[self.address].read()
 
 
 class OBDSensor(BaseSensor):

@@ -36,9 +36,9 @@ class OneWireService:
 
 class OneWireSensor:
     bus_address = ""
+    file_path = ""
     latest_reading = None
     latest_reading_timestamp = None
-    file_path = ""
     
     def __str__(self):
         return "{}: {}".format(
