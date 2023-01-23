@@ -78,7 +78,12 @@ class BaseSensor(models.Model):
 
 class OneWireSensor(BaseSensor):
     def value(self):
-        return ONE_WIRE_SERVICE.sensors[self.address].read()
+        try:
+            value = ONE_WIRE_SERVICE.sensors[self.address].read()
+        except KeyError:
+            print("Sensor '{}' not connected".format(self.address))
+            value = "-"
+        return value
 
 
 class OBDSensor(BaseSensor):
