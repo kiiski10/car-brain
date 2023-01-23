@@ -8,7 +8,7 @@ class OneWireSensorSerializer(serializers.HyperlinkedModelSerializer):
         model = OneWireSensor
         fields = [
             "pk",
-            "command_args",
+            "address",
             "label",
             "value",
             "unit",
@@ -22,7 +22,7 @@ class OBDSensorSerializer(serializers.HyperlinkedModelSerializer):
         model = OBDSensor
         fields = [
             "pk",
-            "command_args",
+            "address",
             "label",
             "value",
             "unit",

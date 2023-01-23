@@ -13,7 +13,7 @@ FLOW_UNITS = [
 
 ROTATION_UNITS = [
     ("rpm", "r/m"),
-    ("dpm", "deg/m"),
+    ("dpm", "deg/sec"),
 ]
 
 HUMIDITY_UNITS = [
@@ -63,7 +63,7 @@ class BaseSensor(models.Model):
     command_base = models.ForeignKey(
         CommandBaseString, on_delete=models.PROTECT, blank=True, null=True
     )
-    command_args = models.CharField(max_length=250, blank=True, null=True)
+    address = models.CharField(max_length=250, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
 
